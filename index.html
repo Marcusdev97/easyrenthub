@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Rent Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header id="all-properties">
+        <h1>大马留学生住房</h1>
+    </header>
+    <div class="nav-links">
+        <a href="#" data-location="SS13">SS13</a>
+        <a href="#" data-location="IconCity">IconCity</a>
+        <a href="#" data-location="SS15">SS15</a>
+        <a href="#" data-location="GeoLake">GeoLake</a>
+        <a href="#" data-location="Edumetro">Edumetro</a>
+        <a href="#" data-location="PlazaKelana">Plaza Kelana</a>
+    </div>
+    <main id="property-list">
+        <!-- Property cards will be inserted here by JavaScript -->
+    </main>
+    <footer>
+        <p>&copy; 2024 Easy Rent Hub</p>
+    </footer>
+
+    <!-- Property Details Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="carousel">
+                <div id="carousel-images" class="carousel-images"></div>
+                <div class="carousel-buttons">
+                    <button id="prev">&#10094;</button>
+                    <button id="next">&#10095;</button>
+                </div>
+            </div>
+            <div id="modal-details"></div>
+            <button class="appointment-button" id="appointment-button">我要预约这个单位</button>
+        </div>
+    </div>
+</body>
