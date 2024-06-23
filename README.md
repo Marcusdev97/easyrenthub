@@ -1,1 +1,18 @@
-This is myEasyRentHub website , use for China user book their rental property in Malaysia.
+easyrenthub是一个简单的租房信息平台，主要提供可用房源的信息。用户可以浏览网站上的房源列表，并通过添加微信或WhatsApp获取更多详细信息和进一步的服务。
+
+项目结构
+index.html: 主页面的HTML文件，展示租房信息。
+scripts.js: 包含网站的主要功能逻辑，如表单处理、图片上传预览等。
+styles.css: 定义网站的样式和布局。
+package-lock.json 和 webpack.config.js: 用于项目依赖管理和打包配置。
+
+功能特点
+用户可以在网站上浏览可用的房源信息。
+提供添加微信或WhatsApp的选项，以便用户获取更多信息。
+通过简洁的界面和清晰的引导，提高用户的使用体验。
+
+贡献
+欢迎提交问题（issues）和拉取请求（pull requests）来改进此项目。有关详细信息，请参阅贡献指南。
+
+许可
+本项目基于MIT许可进行分发。详情请参阅LICENSE。
