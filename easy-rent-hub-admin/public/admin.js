@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const requiredInputs = Array.from(uploadForm.querySelectorAll('input[required], select[required]'));
 
   let imagesBuffered = false;
+  let bufferedImages = [];
 
   const checkFormValidity = () => {
     const allFilled = requiredInputs.every(input => input.value.trim() !== '');
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const sanitizeString = (str) => {
-    return str.replace(/[^\p{L}\p{N}\s.-]/gu, ''); // Allow word characters, numbers, spaces, dots, and hyphens
+    return str.replace(/[^\p{L}\p{N}\s.-]/gu, '');
   };
 
   const validateFormData = (formData) => {
@@ -65,23 +66,56 @@ document.addEventListener('DOMContentLoaded', () => {
     return true;
   };
 
+  const updateBufferedImages = () => {
+    imagesBuffered = bufferedImages.length > 0;
+    checkFormValidity();
+  };
+
+  const updateImagePreviews = () => {
+    imagePreviewContainer.innerHTML = '';
+    bufferedImages.forEach((image, index) => {
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(image.blob);
+      
+      const removeButton = document.createElement('button');
+      removeButton.className = 'remove-icon';
+      removeButton.innerHTML = '<img src="remove-icon.png" alt="Remove">';
+      removeButton.onclick = () => {
+        bufferedImages = bufferedImages.filter((_, i) => i !== index);
+        updateBufferedImages();
+        updateImagePreviews();
+      };
+
+      const imageWrapper = document.createElement('div');
+      imageWrapper.className = 'image-preview';
+      imageWrapper.dataset.index = index;
+      imageWrapper.appendChild(img);
+      imageWrapper.appendChild(removeButton);
+      imagePreviewContainer.appendChild(imageWrapper);
+    });
+    bufferingIndicator.style.display = 'none';
+  };
+
+  new Sortable(imagePreviewContainer, {
+    animation: 150,
+    onEnd: () => {
+      const newBufferedImages = [];
+      const previews = imagePreviewContainer.querySelectorAll('.image-preview');
+      previews.forEach(preview => {
+        const index = preview.dataset.index;
+        newBufferedImages.push(bufferedImages[index]);
+      });
+      bufferedImages = newBufferedImages;
+    }
+  });
+
   uploadForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    console.log('Form submitted');
-
-    const convertSqftToSqm = (sqft) => {
-      const sqm = sqft * 0.092903;
-      return sqm.toFixed(2); // return with two decimals
-    }
-
-    const areaInput = document.getElementById('area');
-    const sqmValue = parseFloat(convertSqftToSqm(parseFloat(areaInput.value)));
     const formData = new FormData();
     formData.append('title', sanitizeString(document.getElementById('title').value));
     formData.append('availableDate', sanitizeString(document.getElementById('availableDate').value));
     formData.append('rooms', sanitizeString(document.getElementById('rooms').value));
     formData.append('bathrooms', sanitizeString(document.getElementById('bathrooms').value));
-    formData.append('area', sqmValue); // Ensure area is a number
     formData.append('location', sanitizeString(document.getElementById('location').value));
     formData.append('name', sanitizeString(document.getElementById('name').value));
     formData.append('price', sanitizeString(document.getElementById('price').value));
@@ -90,30 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const tagsInput = document.getElementById('tags').value;
     const tagsArray = tagsInput.split(';').map(tag => sanitizeString(tag.trim()));
     formData.append('tags', JSON.stringify(tagsArray));
-
-    // Set rented to false
     formData.append('rented', false);
 
-    const images = document.getElementById('images').files;
-    const resizedImages = await Promise.all(Array.from(images).map(async (image) => {
-      try {
-        const resizedImageBlob = await resizeImage(image, 600, 600); // Resize to max 600x600
-        return { blob: resizedImageBlob, name: image.name };
-      } catch (error) {
-        console.error('Error resizing image:', error);
-        alert('An error occurred while processing images.');
-        return null;
-      }
-    }));
-
-    resizedImages.filter(Boolean).forEach(image => {
+    bufferedImages.forEach((image, index) => {
       formData.append('images', image.blob, image.name);
-    });
-
-    // Log the FormData entries manually
-    console.log('FormData before fetch:');
-    formData.forEach((value, key) => {
-      console.log(`${key}:`, value);
     });
 
     if (!validateFormData(formData)) {
@@ -127,139 +141,105 @@ document.addEventListener('DOMContentLoaded', () => {
         body: formData,
       });
 
-      console.log('Fetch response:', response);
-
       if (response.ok) {
         alert('Property uploaded successfully!');
-        uploadForm.reset(); // Reset the form after successful submission
+        uploadForm.reset();
+        bufferedImages = [];
+        imagePreviewContainer.innerHTML = '';
+        updateBufferedImages();
         loadProperties();
       } else {
         const errorText = await response.text();
-        console.log('Error Text:', errorText);
-        console.log(response);
         alert(`Failed to upload property: ${errorText}`);
       }
     } catch (error) {
-      console.error('Error during upload:', error);
       alert('An error occurred while uploading the property.');
     }
   });
 
-  // Handle image preview and buffering
-  document.getElementById('images').addEventListener('change', () => {
-    imagePreviewContainer.innerHTML = '';
-    bufferingIndicator.style.display = 'block';
-    uploadButton.disabled = true;
-
+  document.getElementById('images').addEventListener('change', async () => {
     const files = document.getElementById('images').files;
-    const bufferedImages = [];
+    bufferingIndicator.style.display = 'block';
+    const imagePromises = [];
 
-    Array.from(files).forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.style.maxWidth = '100px';
-        img.style.margin = '5px';
-        imagePreviewContainer.appendChild(img);
-        bufferedImages.push(e.target.result);
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      imagePromises.push(resizeImage(file, 600, 600).then(resizedImageBlob => {
+        bufferedImages.push({ blob: resizedImageBlob, name: file.name });
+      }));
+    }
 
-        if (bufferedImages.length === files.length) {
-          bufferingIndicator.style.display = 'none';
-          imagesBuffered = true;
-          checkFormValidity();
-        }
-      };
-      reader.readAsDataURL(file);
-    });
+    await Promise.all(imagePromises);
+    updateImagePreviews();
+    updateBufferedImages();
   });
 
   async function loadProperties() {
-    const response = await fetch('/api/properties');
-    const properties = await response.json();
-    const propertyList = document.getElementById('propertyList');
-    propertyList.innerHTML = '';
-    properties.forEach(property => {
-      const li = document.createElement('li');
-      li.textContent = `${property.name} - ${property.availableDate}`;
-      li.id = `property-${property.id}`;
-      
-      const buttonsDiv = document.createElement('div');
-      buttonsDiv.className = 'buttons';
-  
-      const deleteButton = document.createElement('button');
-      deleteButton.textContent = 'Delete';
-      deleteButton.addEventListener('click', async () => {
-        const deleteResponse = await fetch(`/api/properties/${property.id}`, { method: 'DELETE' });
-        if (deleteResponse.ok) {
-          alert('Property deleted successfully!');
-          loadProperties();
-        } else {
-          alert('Failed to delete property.');
-        }
-      });
-      buttonsDiv.appendChild(deleteButton);
-  
-      // Add Rented/Available button
-      const statusButton = document.createElement('button');
-      statusButton.textContent = property.rented ? 'Available' : 'Rented'; // fix button text
-      statusButton.className = property.rented ? 'available' : 'rented'; // fix class name here
-      statusButton.addEventListener('click', async () => {
-        const newStatus = !property.rented;
-        statusButton.textContent = newStatus ? 'Available' : 'Rented'; // Immediately change button text
-        statusButton.className = newStatus ? 'available' : 'rented'; // Immediately change button class
-        try {
-          // Get the full property details
-          const response = await fetch(`/api/properties/${property.id}`);
-          const propertyDetails = await response.json();
-          propertyDetails.rented = newStatus;
-
-          const statusResponse = await fetch(`/api/properties/${property.id}`, { 
-            method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(propertyDetails)
-          });
-
-          if (statusResponse.ok) {
-            console.log(`Property marked as ${newStatus ? 'available' : 'rented'} successfully!`);
-            // Refresh properties after short delay to avoid UI lag
-            setTimeout(() => {
-              loadProperties();
-            }, 500);
-          } else {
-            const errorText = await statusResponse.text();
-            console.error('Failed to update property status:', errorText);
-            alert(`Failed to mark property as ${newStatus ? 'available' : 'rented'}.`);
-          }
-        } catch (error) {
-          console.error('Error during status update:', error);
-          alert('An error occurred while updating the property status.');
-        }
-      });
-      buttonsDiv.appendChild(statusButton);
-  
-      li.appendChild(buttonsDiv);
-      propertyList.appendChild(li);
-    });
-  }
-
-  async function refreshProperty(propertyId) {
     try {
-      const response = await fetch(`/api/properties/${propertyId}`);
-      if (response.ok) {
-        const property = await response.json();
-        const propertyElement = document.getElementById(`property-${propertyId}`);
-        if (propertyElement) {
-          propertyElement.querySelector('.buttons button:nth-child(2)').textContent = property.rented ? 'Available' : 'Rented';
-          propertyElement.querySelector('.buttons button:nth-child(2)').className = property.rented ? 'available' : 'rented';
-        }
-      } else {
-        console.error('Failed to fetch property data:', await response.text());
+      const response = await fetch('/api/properties');
+      const properties = await response.json();
+      if (!Array.isArray(properties)) {
+        throw new Error('Expected properties to be an array');
       }
+      const propertyList = document.getElementById('propertyList');
+      propertyList.innerHTML = '';
+      properties.forEach(property => {
+        const li = document.createElement('li');
+        li.textContent = `${property.name} - ${property.availableDate}`;
+        li.id = `property-${property._id}`;
+        
+        const buttonsDiv = document.createElement('div');
+        buttonsDiv.className = 'buttons';
+  
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', async () => {
+          const deleteResponse = await fetch(`/api/properties/${property._id}`, { method: 'DELETE' });
+          if (deleteResponse.ok) {
+            alert('Property deleted successfully!');
+            loadProperties();
+          } else {
+            alert('Failed to delete property.');
+          }
+        });
+        buttonsDiv.appendChild(deleteButton);
+  
+        const statusButton = document.createElement('button');
+        statusButton.textContent = property.rented ? 'Available' : 'Rented';
+        statusButton.className = property.rented ? 'available' : 'rented';
+        statusButton.addEventListener('click', async () => {
+          const newStatus = !property.rented;
+          statusButton.textContent = newStatus ? 'Available' : 'Rented';
+          statusButton.className = newStatus ? 'available' : 'rented';
+          try {
+            const response = await fetch(`/api/properties/${property._id}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ rented: newStatus })
+            });
+  
+            if (response.ok) {
+              console.log(`Property marked as ${newStatus ? 'available' : 'rented'} successfully!`);
+              setTimeout(() => {
+                loadProperties();
+              }, 500);
+            } else {
+              const errorText = await response.text();
+              alert(`Failed to mark property as ${newStatus ? 'available' : 'rented'}.`);
+            }
+          } catch (error) {
+            alert('An error occurred while updating the property status.');
+          }
+        });
+        buttonsDiv.appendChild(statusButton);
+  
+        li.appendChild(buttonsDiv);
+        propertyList.appendChild(li);
+      });
     } catch (error) {
-      console.error('Error during refresh property:', error);
+      console.error('Failed to load properties:', error);
     }
   }
   
