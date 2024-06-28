@@ -15,10 +15,10 @@ header {
     background: url('../images/headerImage.png') no-repeat center center;
     background-size: cover;
     text-align: center;
-    padding: 2em 0; /* Adjust padding to your preference */
-    color: white; /* Ensure text is readable against the background */
-    position: relative; /* Ensure positioning for overlay */
-    z-index: 10; /* Ensure the header stays above other content */
+    padding: 2em 0;
+    color: white;
+    position: relative;
+    z-index: 10;
 }
 
 .header-link {
@@ -27,11 +27,10 @@ header {
     display: inline-block;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
-    font-size: 2em; /* Adjust font size to your preference */
+    font-size: 2em;
     font-weight: bold;
 }
 
-/* Optional: Add a semi-transparent overlay for better text readability */
 header::before {
     content: '';
     position: absolute;
@@ -39,7 +38,7 @@ header::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
 
@@ -107,32 +106,29 @@ header h1 {
     color: #333;
 }
 
-/* Updated Tips Box Styling */
 .tips-box {
     margin-top: 15px;
     padding: 15px;
-    background-color: #e6f7ff; /* Light blue background */
+    background-color: #e6f7ff;
     border-radius: 8px;
     font-size: 1rem;
-    color: #005b96; /* Darker blue font color */
-    border: 1px solid #b3e0ff; /* Border color to match the background */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+    color: #005b96;
+    border: 1px solid #b3e0ff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tips-box strong {
     display: block;
     margin-bottom: 5px;
-    color: #004080; /* Slightly darker blue for emphasis */
-    font-weight: bold; /* Ensure the text is bold */
+    color: #004080;
+    font-weight: bold;
 }
 
 /* Main Content Styling */
 main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 10px;
-    flex: 1;
     padding: 10px;
 }
 
@@ -140,7 +136,6 @@ main {
 .property-card {
     width: 100%;
     max-width: 350px;
-    height: auto;
     margin: 5px;
     padding: 15px;
     border: 1px solid #ccc;
@@ -153,7 +148,6 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: left;
     text-align: left;
 }
 
@@ -179,7 +173,7 @@ main {
 /* Image Container Styling */
 .property-card .image-container {
     width: 100%;
-    height: 200px;
+    height: 200px; /* This is for desktop view */
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -189,20 +183,9 @@ main {
 }
 
 .property-card .image-container img {
-    flex-shrink: 0;
-    min-width: 100%;
-    min-height: 100%;
-    filter: brightness(1.2) contrast(1.1);
-}
-
-@media (max-width: 767px) {
-    .property-card {
-        height: auto;
-    }
-
-    .property-card .image-container {
-        height: 150px;
-    }
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container without distortion */
 }
 
 /* Rented Overlay Styling */
@@ -275,6 +258,30 @@ main {
     background-color: #e9ecef;
 }
 
+.property-details .available-date {
+    color: #007bff;
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Property Tags Styling */
+.property-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.property-tags span {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    color: #333;
+}
+
 /* Modal Styling */
 .modal {
     display: none;
@@ -286,7 +293,7 @@ main {
     overflow: auto;
     background-color: rgba(0,0,0,0.4);
     padding-top: 60px;
-    z-index: 1000; /* High value to stay above other content */
+    z-index: 1000;
 }
 
 .modal-content {
@@ -333,11 +340,6 @@ main {
     margin-top: 10px;
 }
 
-/* Modal Styling */
-.modal-content {
-    max-width: 700px;
-}
-
 /* Update existing modal styles for images */
 #full-image-modal {
     display: none;
@@ -378,9 +380,20 @@ main {
 
 .close {
     position: absolute;
-    top: 20px; /* Adjust as needed */
-    right: 20px; /* Adjust as needed */
-    z-index: 1010; /* Ensure it stays above the modal content */
+    top: 20px;
+    right: 20px;
+    z-index: 1010;
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* Update the modal to include buttons for WeChat and WhatsApp */
@@ -398,21 +411,6 @@ main {
 
 .modal-content button:hover {
     background-color: #495057;
-}
-
-/* Close Button Styling */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 /* Carousel Styling */
@@ -437,10 +435,9 @@ main {
 
 .carousel-images img {
     width: 100%;
+    height: auto;
     object-fit: cover;
     transition: transform 0.5s ease;
-    height: auto;
-    max-height: 300px;
 }
 
 .carousel-buttons {
@@ -537,11 +534,7 @@ body.mobile .modal-content {
 }
 
 body.mobile .carousel {
-    height: 200px;
-}
-
-body.mobile .carousel-images img {
-    max-height: 150px;
+    height: 300px;
 }
 
 /* Center the property list */
@@ -560,4 +553,30 @@ body.mobile .carousel-images img {
     max-width: 350px;
     height: 0;
     margin-bottom: 20px;
+}
+
+/* Mobile-specific styles */
+@media only screen and (max-width: 767px) {
+    .modal-content {
+        height: auto; /* Set the height to 60vh */
+        margin: -5% auto;
+        overflow: hidden; /* Ensure no overflow */
+    }
+
+    .carousel {
+        height: 90vh; /* Ensure the carousel takes the full height of modal-content */
+    }
+
+    .carousel-images {
+        height: 100%; /* Ensure the images container takes the full height of the carousel */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .carousel-images img {
+        height: 100%; /* Adjust the image height to fit the container */
+        width: auto; /* Maintain aspect ratio */
+        object-fit: cover; /* Ensure the image covers the container */
+    }
 }
