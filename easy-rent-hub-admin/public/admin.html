@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="icon" href="path/to/your/favicon.ico">
+  <title>Admin Page</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+</head>
+<body>
+  <h1>Admin Page</h1>
+  <form id="uploadForm">
+    <input type="text" id="title" name="title" placeholder="Title" required>
+    <input type="date" id="availableDate" name="availableDate" placeholder="Available date" required>
+    <div class="row">
+      <input type="text" id="rooms" name="rooms" placeholder="Rooms" required>
+      <input type="text" id="bathrooms" name="bathrooms" placeholder="Bathrooms" required>
+    </div>
+    <select id="location" name="location" required>
+      <option value="" disabled selected>Select Location</option>
+      <option value="SS13">SS13</option>
+      <option value="SS15">SS15</option>
+      <option value="CasaTiara">CasaTiara</option>
+      <option value="IconCity">IconCity</option>
+      <option value="Greenfield">Greenfield</option>
+      <option value="GeoSense">GeoSense</option>
+      <option value="GeoLake">GeoLake</option>
+      <option value="Union">Union</option>
+      <option value="Edumetro">Edumetro</option>
+    </select>
+    <input type="text" id="name" name="name" placeholder="Name" required>
+    <input type="number" id="price" name="price" placeholder="Price" required>
+    <input type="text" id="tags" name="tags" placeholder="Tags" required>
+    <input type="text" id="description" name="description" placeholder="Description" required>
+    <input type="file" id="images" name="images" accept="image/*" multiple>
+    <div id="imagePreviewContainer" class="image-preview-container"></div>
+    <div id="bufferingIndicator" style="display:none;">Buffering images, please wait...</div>
+    <button id="uploadButton" type="submit" disabled>Upload</button>
+  </form>
+    
+  <h2>Existing Properties</h2>
+  <ul id="propertyList"></ul>
+
+  <script src="admin.js"></script>
+</body>
+</html>

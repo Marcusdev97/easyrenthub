@@ -1,0 +1,582 @@
+/* General Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    line-height: 1.6;
+}
+
+/* Header Styling with Background Image */
+header {
+    background: url('../images/headerImage.png') no-repeat center center;
+    background-size: cover;
+    text-align: center;
+    padding: 2em 0;
+    color: white;
+    position: relative;
+    z-index: 10;
+}
+
+.header-link {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+header h1 {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    padding: 0;
+}
+
+.header-link:hover {
+    background-color: #495057;
+    color: white;
+}
+
+/* Navigation Links Styling */
+.nav-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    padding: 0 10px;
+}
+
+.nav-links a {
+    color: #343a40;
+    padding: 5px 10px;
+    text-decoration: none;
+    border: 1px solid #343a40;
+    border-radius: 4px;
+    margin: 3px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    cursor: pointer;
+}
+
+.nav-links a:hover {
+    background-color: #343a40;
+    color: white;
+    border-color: #343a40;
+}
+
+/* Updated Location Description Styling */
+#location-description-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.description-box {
+    max-width: 700px;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.description-box p {
+    margin: 10px 0;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #333;
+}
+
+.tips-box {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #e6f7ff;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #005b96;
+    border: 1px solid #b3e0ff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tips-box strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #004080;
+    font-weight: bold;
+}
+
+/* Main Content Styling */
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 10px;
+    padding: 10px;
+}
+
+/* Property Card Styling */
+.property-card {
+    width: 100%;
+    max-width: 350px;
+    margin: 5px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+    .property-card {
+        width: 350px;
+        height: 450px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .property-card {
+        width: 350px;
+        height: 450px;
+    }
+}
+
+/* Image Container Styling */
+.property-card .image-container {
+    width: 100%;
+    height: 200px; /* This is for desktop view */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    border-radius: 10px 10px 0 0;
+}
+
+.property-card .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container without distortion */
+}
+
+/* Rented Overlay Styling */
+.property-card.rented {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.property-card.rented .image-container {
+    position: relative;
+}
+
+.property-card.rented .overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Property Details Styling */
+.property-details {
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.property-details h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+    font-weight: bold;
+}
+
+.property-details p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.property-details p strong {
+    margin-right: 3px;
+}
+
+.property-details .price {
+    color: #e74c3c;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.property-details .meta-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.property-details .meta-info span {
+    color: #343a40;
+    font-size: 0.9em;
+    border: 1px solid #343a40;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background-color: #e9ecef;
+}
+
+.property-details .available-date {
+    color: #007bff;
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Property Tags Styling */
+.property-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.property-tags span {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    color: #333;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2, .modal-content p, .modal-content .title {
+    margin: 5px 0;
+    padding: 0;
+}
+
+.modal-content .title {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.modal-content .meta-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal-content .meta-info span {
+    color: #2c3e50;
+    font-size: 0.9em;
+    border: 1px solid #2c3e50;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin: 2px;
+}
+
+/* Styling for appointment buttons container */
+.appointment-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Update existing modal styles for images */
+#full-image-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+#full-image {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+#full-image-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#full-image-close:hover,
+#full-image-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1010;
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Update the modal to include buttons for WeChat and WhatsApp */
+.modal-content button {
+    background-color: #343a40;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.modal-content button:hover {
+    background-color: #495057;
+}
+
+/* Carousel Styling */
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.carousel-images {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-images img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.carousel-buttons {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0;
+}
+
+.carousel-buttons button {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-buttons button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.carousel-buttons button:focus {
+    outline: none;
+}
+
+.carousel-buttons button svg {
+    width: 15px;
+    height: 15px;
+}
+
+.carousel-buttons button svg path {
+    fill: white;
+}
+
+/* QR Code Container Styling */
+#qrcode {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+}
+
+#qrcode img {
+    width: 100%;
+    height: auto;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* General Mobile Styling */
+body.mobile {
+    font-size: 14px;
+}
+
+/* Adjust Property Card for Mobile */
+body.mobile .property-card {
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: auto;
+}
+
+body.mobile .property-card .image-container {
+    height: 150px;
+}
+
+body.mobile .modal-content {
+    width: 90%;
+    padding: 15px;
+}
+
+body.mobile .carousel {
+    height: 300px;
+}
+
+/* Center the property list */
+#property-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+/* Center the container for fewer properties */
+#property-list:empty::before {
+    content: "";
+    width: 100%;
+    max-width: 350px;
+    height: 0;
+    margin-bottom: 20px;
+}
+
+/* Mobile-specific styles */
+@media only screen and (max-width: 767px) {
+    .modal-content {
+        height: auto; /* Set the height to 60vh */
+        margin: -5% auto;
+        overflow: hidden; /* Ensure no overflow */
+    }
+
+    .carousel {
+        height: 90vh; /* Ensure the carousel takes the full height of modal-content */
+    }
+
+    .carousel-images {
+        height: 100%; /* Ensure the images container takes the full height of the carousel */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .carousel-images img {
+        height: 100%; /* Adjust the image height to fit the container */
+        width: auto; /* Maintain aspect ratio */
+        object-fit: cover; /* Ensure the image covers the container */
+    }
+}

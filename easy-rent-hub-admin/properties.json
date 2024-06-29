@@ -1,0 +1,122 @@
+[
+  {
+    "title": "Test - 1",
+    "availableDate": "2024-01-01",
+    "rooms": "2",
+    "bathrooms": "1",
+    "location": "CasaTiara",
+    "name": "E Tiara",
+    "price": 2500,
+    "tags": [
+      "小区配套设施高端",
+      "性价比超高",
+      "可拎包入住",
+      "停车位2个"
+    ],
+    "description": "asdasa s 啊实打实大师大师d",
+    "images": [
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/62d9a1a4-d15b-4095-aca2-107e51eb8863.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/d1650c48-8880-40b5-bdd8-2cc232cabc29.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/42e73f59-9be0-4fdf-b4c2-4c37b06df20b.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/780747c1-cfe8-4ea8-a01a-aec6621046d7.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/83ba18d7-e332-4faa-91cb-a91a4bd0b2ad.jpg"
+    ],
+    "rented": false,
+    "id": "dab52169-2ef7-4feb-8c97-774039f18ade"
+  },
+  {
+    "title": "dasdas",
+    "availableDate": "2024-01-01",
+    "rooms": "2",
+    "bathrooms": "1",
+    "location": "CasaTiara",
+    "name": "Icon City Studio",
+    "price": 2500,
+    "tags": [
+      "豪华",
+      "优秀",
+      "中文"
+    ],
+    "description": "asdasd",
+    "images": [
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/e7cee62b-fba4-4ffd-a99d-01a6f0f1774e.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/7329e6c7-5884-42a6-8fd7-8011e9442977.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/5b73ad29-83d6-44be-be6f-2f2553c75fae.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/1bd4969a-9d99-425c-a349-19994fa5d501.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/9e43ab2b-7c78-4535-b1c0-b155e1878837.jpg"
+    ],
+    "rented": false,
+    "id": "2a944ef9-a2a7-4574-aba9-d3e2376f6631"
+  },
+  {
+    "title": "Green",
+    "availableDate": "2024-02-02",
+    "rooms": "2",
+    "bathrooms": "1",
+    "location": "IconCity",
+    "name": "Greenfield Residence",
+    "price": 2500,
+    "tags": [
+      "小区配套设施高端",
+      "性价比超高",
+      "可拎包入住",
+      "停车位2个"
+    ],
+    "description": "12312",
+    "images": [
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/4786253a-65a7-4ff8-8af7-af4e2d4457a7.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/2631a228-e1b2-4a75-b965-4148252e0285.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/89210b80-1861-4dd7-b603-0c513a261c3d.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/d43b6cbd-6456-43ed-9683-49123ce2258d.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/8ac87f99-beaa-47c3-86ec-1bd55a00b7c7.jpg"
+    ],
+    "rented": false,
+    "id": "4574b3c3-32fe-4f48-898e-f36d245fc08f"
+  },
+  {
+    "title": "Green",
+    "availableDate": "2022-02-01",
+    "rooms": "2",
+    "bathrooms": "1",
+    "location": "CasaTiara",
+    "name": "Greenfield Residence - 2房1卫",
+    "price": 2500,
+    "tags": [
+      "精装修",
+      "家具配套齐全",
+      "可拎包入住"
+    ],
+    "description": "123123",
+    "images": [
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/9eac5848-034f-45ec-a413-dc2bef16a4a8.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/c00bd039-8ae1-487c-9048-ab9d47a62624.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/c502cc26-8327-468e-afe7-dcc766bebaf1.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/2ef5ca75-5454-4c69-b190-a6b0912f875d.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/2c42be24-64d4-4afd-9d4e-69deada1a7b5.jpg"
+    ],
+    "rented": false,
+    "id": "3ab00d7b-fd3d-46d3-9a3d-1644b93266ec"
+  },
+  {
+    "title": "tester",
+    "availableDate": "2024-01-01",
+    "rooms": "1",
+    "bathrooms": "1",
+    "location": "SS13",
+    "name": "Greenfield Residence",
+    "price": 2500,
+    "tags": [
+      "Lorem"
+    ],
+    "description": "asdasdasdasd",
+    "images": [
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/234d82f7-b46d-444a-ac06-4d2a5ead1fba.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/62d6de69-846c-4766-8f54-d3b39e27aec8.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/2de23353-d690-4fbd-a424-243a962f867a.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/daae6810-b519-4164-8b27-c32b8858cbce.jpg",
+      "https://easy-rent-hub.auto.r2.cloudflarestorage.com/c9c68273-1156-4fc6-b4c8-75597c4c6846.jpg"
+    ],
+    "rented": false,
+    "id": "4c4cd25e-d2b9-4d83-859d-44be6d4a2e1f"
+  }
+]
