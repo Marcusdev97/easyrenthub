@@ -4,10 +4,7 @@
   "description": "A project to manage rental properties.",
   "main": "server.js",
   "scripts": {
-    "start": "concurrently \"npm run start-user\" \"npm run start-admin\"",
-    "start-user": "cd easy-rent-hub && npm start",
-    "start-admin": "cd easy-rent-hub-admin && npm start",
-    "test": "jest --detectOpenHandles"
+    "start": "node server.js"
   },
   "jest": {
     "testEnvironment": "node"
