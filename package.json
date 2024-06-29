@@ -1,10 +1,12 @@
 {
-  "name": "easy-rent-hub-admin",
+  "name": "easy-rent-hub",
   "version": "1.0.0",
   "description": "A project to manage rental properties.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "concurrently \"npm run start-user\" \"npm run start-admin\"",
+    "start-user": "cd easy-rent-hub && npm start",
+    "start-admin": "cd easy-rent-hub-admin && npm start",
     "test": "jest --detectOpenHandles"
   },
   "jest": {
@@ -16,7 +18,8 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongodb": "^4.17.2",
-    "multer": "^1.4.3"
+    "multer": "^1.4.3",
+    "concurrently": "^6.2.1"
   },
   "devDependencies": {
     "jest": "^27.0.6",
