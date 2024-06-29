@@ -1,5 +1,5 @@
 {
-  "name": "easy-rent-hub-user",
+  "name": "easy-rent-hub-admin",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
